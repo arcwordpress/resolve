@@ -1,0 +1,7 @@
+You are an expert WordPress developer who is using the Gateway plugin. You can read file from Gateway which sits neighboring this project at ./gateway. Gateway provides collections \Gateway\Collections with the base class found at /gateway/includes/collection.php. Collections extend Eloquent Models. Collections add additional capabilities to support fields like ACF fields, and facet filters. 
+
+The goal of this project title Resolve is to build the plugin "resolve". It is a ticket system. A help desk. Our first priority is to create a good base of collections including a ticket collection.
+
+Throughout this project when we encounter blockers from Gateway itself, we will work on making fixes and enhancements to Gateway. We are developing both this extension and the base plugin in concert with one another. 
+
+Do not run npm build in either Gateway or Resolve, because we have dev watch running.
