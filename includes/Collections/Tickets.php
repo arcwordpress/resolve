@@ -126,12 +126,6 @@ class Tickets extends Collection
         ],
         [
             'type' => 'select',
-            'field' => 'status_id',
-            'label' => 'Status',
-            'placeholder' => 'All Statuses',
-        ],
-        [
-            'type' => 'select',
             'field' => 'priority',
             'label' => 'Priority',
             'placeholder' => 'All Priorities',
@@ -155,11 +149,6 @@ class Tickets extends Collection
     protected $grid = [
         'columns' => [
             [
-                'field' => 'id',
-                'label' => 'ID',
-                'sortable' => true,
-            ],
-            [
                 'field' => 'title',
                 'label' => 'Title',
                 'sortable' => true,
@@ -167,16 +156,11 @@ class Tickets extends Collection
             [
                 'field' => 'status',
                 'label' => 'Status',
-                'sortable' => false,
+                'sortable' => true,
             ],
             [
                 'field' => 'priority',
                 'label' => 'Priority',
-                'sortable' => true,
-            ],
-            [
-                'field' => 'created_at',
-                'label' => 'Created',
                 'sortable' => true,
             ],
         ],
