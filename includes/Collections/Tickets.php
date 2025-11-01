@@ -44,7 +44,21 @@ class Tickets extends Collection
      *
      * @var array
      */
-    protected $fillable = ['title', 'description', 'status', 'priority', 'assigned_to', 'created_by'];
+    protected $fillable = ['title', 'description', 'status_id', 'priority', 'assigned_to', 'created_by'];
+
+    /**
+     * Eager load relationships
+     *
+     * @var array
+     */
+    protected $with = ['status'];
+
+    /**
+     * Append computed attributes to array/JSON output
+     *
+     * @var array
+     */
+    protected $appends = ['status_name'];
 
     /**
      * Apply defaults before validation
@@ -54,9 +68,12 @@ class Tickets extends Collection
      */
     public function beforeValidate($data)
     {
-        // Apply default status if not provided
-        if (!isset($data['status']) || $data['status'] === '') {
-            $data['status'] = 'open';
+        // Apply default status_id if not provided (get the "open" status ID)
+        if (!isset($data['status_id']) || $data['status_id'] === '') {
+            $openStatus = TicketStatuses::where('slug', 'open')->first();
+            if ($openStatus) {
+                $data['status_id'] = $openStatus->id;
+            }
         }
 
         // Apply default priority if not provided
@@ -109,7 +126,7 @@ class Tickets extends Collection
         ],
         [
             'type' => 'select',
-            'field' => 'status',
+            'field' => 'status_id',
             'label' => 'Status',
             'placeholder' => 'All Statuses',
         ],
@@ -127,8 +144,42 @@ class Tickets extends Collection
      * @var array
      */
     protected $defaults = [
-        'status' => 'open',
         'priority' => 'medium',
+    ];
+
+    /**
+     * Grid configuration
+     *
+     * @var array
+     */
+    protected $grid = [
+        'columns' => [
+            [
+                'field' => 'id',
+                'label' => 'ID',
+                'sortable' => true,
+            ],
+            [
+                'field' => 'title',
+                'label' => 'Title',
+                'sortable' => true,
+            ],
+            [
+                'field' => 'status',
+                'label' => 'Status',
+                'sortable' => false,
+            ],
+            [
+                'field' => 'priority',
+                'label' => 'Priority',
+                'sortable' => true,
+            ],
+            [
+                'field' => 'created_at',
+                'label' => 'Created',
+                'sortable' => true,
+            ],
+        ],
     ];
 
     /**
@@ -151,17 +202,20 @@ class Tickets extends Collection
             'placeholder' => 'Detailed description of the ticket',
             'helpText' => 'Full description of the issue, request, or task',
         ],
-        'status' => [
-            'type' => 'select',
+        'status_id' => [
+            'type' => 'relation',
             'label' => 'Status',
             'required' => false,
-            'default' => 'open',
-            'options' => [
-                ['value' => 'open', 'label' => 'Open'],
-                ['value' => 'in-progress', 'label' => 'In Progress'],
-                ['value' => 'closed', 'label' => 'Closed'],
+            'relation' => [
+                'endpoint' => '/wp-json/resolve/v1/ticket-statuses',
+                'labelField' => 'name',
+                'valueField' => 'id',
+                'placeholder' => 'Select a status...',
             ],
-            'helpText' => 'Current status of the ticket (defaults to Open)',
+            'relationshipType' => 'belongsTo',
+            'collection' => 'ticket_statuses',
+            'displayField' => 'name',
+            'helpText' => 'Current status of the ticket',
         ],
         'priority' => [
             'type' => 'select',
@@ -190,4 +244,25 @@ class Tickets extends Collection
             'helpText' => 'Person who created this ticket',
         ],
     ];
+
+    /**
+     * Relationship: Status this ticket belongs to
+     */
+    public function status()
+    {
+        return $this->belongsTo(TicketStatuses::class, 'status_id');
+    }
+
+    /**
+     * Accessor: Get the status name for display
+     *
+     * @return string|null
+     */
+    public function getStatusNameAttribute()
+    {
+        if (is_object($this->status) && isset($this->status->name)) {
+            return $this->status->name;
+        }
+        return null;
+    }
 }

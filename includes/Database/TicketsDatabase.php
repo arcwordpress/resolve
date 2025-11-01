@@ -25,7 +25,7 @@ class TicketsDatabase
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             title varchar(255) NOT NULL,
             description text NULL,
-            status varchar(50) NULL,
+            status_id bigint(20) unsigned NULL,
             priority varchar(50) NULL,
             assigned_to varchar(255) NULL,
             created_by varchar(255) NULL,
@@ -33,7 +33,7 @@ class TicketsDatabase
             updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             PRIMARY KEY  (id),
             KEY title_index (title),
-            KEY status_index (status),
+            KEY status_id_index (status_id),
             KEY priority_index (priority)
         ) $charset_collate;";
 

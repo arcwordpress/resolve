@@ -72,6 +72,7 @@ class Plugin
     public function onInit()
     {
         // Register collections
+        Collections\TicketStatuses::register();
         Collections\Tickets::register();
 
         do_action('resolve_loaded');
@@ -88,7 +89,8 @@ class Plugin
             wp_die('Resolve requires the Gateway plugin to be installed and activated.');
         }
 
-        // Install database tables
+        // Install database tables (statuses first, then tickets)
+        Database\TicketStatusesDatabase::install();
         Database\TicketsDatabase::install();
 
         // Flush rewrite rules
