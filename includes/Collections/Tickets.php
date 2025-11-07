@@ -47,6 +47,13 @@ class Tickets extends Collection
     protected $fillable = ['title', 'description', 'status_id', 'priority', 'assigned_to', 'created_by'];
 
     /**
+     * The attributes that are searchable
+     *
+     * @var array
+     */
+    protected $searchable = ['title', 'description'];
+
+    /**
      * Eager load relationships
      *
      * @var array
