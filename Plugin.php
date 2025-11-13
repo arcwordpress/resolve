@@ -71,6 +71,9 @@ class Plugin
 
     public function onInit()
     {
+        // Register package first
+        (new Package())->register();
+
         // Register collections
         Collections\TicketStatuses::register();
         Collections\Tickets::register();
