@@ -16,7 +16,8 @@ class TicketStatuses extends Collection
      *
      * @var string
      */
-    protected $key = 'ticket_statuses';
+    protected $key     = 'ticket_statuses';
+    protected $package = 'resolve';
 
     /**
      * The table associated with the collection

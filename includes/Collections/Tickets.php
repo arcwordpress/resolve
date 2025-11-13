@@ -16,7 +16,8 @@ class Tickets extends Collection
      *
      * @var string
      */
-    protected $key = 'tickets';
+    protected $key     = 'tickets';
+    protected $package = 'resolve';
 
     /**
      * The table associated with the collection
