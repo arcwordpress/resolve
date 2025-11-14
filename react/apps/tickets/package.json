@@ -1,0 +1,21 @@
+{
+  "name": "tickets",
+  "version": "1.0.0",
+  "description": "WP Scripts React app for tickets",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "wp-scripts start",
+    "build": "wp-scripts build",
+    "lint": "wp-scripts lint-js"
+  },
+  "dependencies": {
+    "@arcwp/gateway-grids": "file:../../../../gateway/react/packages/grids/dist",
+    "@arcwp/gateway-forms": "file:../../../../gateway/react/packages/forms/dist",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^31.0.0",
+    "dotenv-webpack": "^8.0.1"
+  }
+}

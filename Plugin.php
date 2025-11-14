@@ -78,6 +78,9 @@ class Plugin
         Collections\TicketStatuses::register();
         Collections\Tickets::register();
 
+        // Add tickets page. 
+        (new TicketsPage());
+
         do_action('resolve_loaded');
     }
 
