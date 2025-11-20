@@ -23,7 +23,9 @@ define('RESOLVE_FILE', __FILE__);
 
 // Register SPL autoloader for Resolve classes
 spl_autoload_register(function ($class) {
+    
     $prefix = 'Resolve\\';
+
     $base_dir = RESOLVE_PATH . 'includes/';
 
     $len = strlen($prefix);
@@ -37,6 +39,7 @@ spl_autoload_register(function ($class) {
     if (file_exists($file)) {
         require $file;
     }
+
 });
 
 class Plugin

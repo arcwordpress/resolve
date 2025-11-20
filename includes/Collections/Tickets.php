@@ -102,7 +102,6 @@ class Tickets extends Collection
         'namespace' => 'resolve',
         'version' => 'v1',
         'route' => 'tickets',
-        'allow_basic_auth' => true,
         'methods' => [
             'get_many' => true,
             'get_one' => true,
@@ -112,10 +111,10 @@ class Tickets extends Collection
         ],
         'permissions' => [
             'get_many' => [
-                'type' => 'nonce_only'
+                'type' => 'protected'
             ],
             'get_one' => [
-                'type' => 'nonce_only'
+                'type' => 'protected'
             ],
         ]
     ];

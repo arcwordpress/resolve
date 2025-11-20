@@ -57,7 +57,6 @@ class TicketStatuses extends Collection
         'namespace' => 'resolve',
         'version' => 'v1',
         'route' => 'ticket-statuses',
-        'allow_basic_auth' => true,
         'methods' => [
             'get_many' => true,
             'get_one' => true,
@@ -67,10 +66,10 @@ class TicketStatuses extends Collection
         ],
         'permissions' => [
             'get_many' => [
-                'type' => 'nonce_only'
+                'type' => 'protected'
             ],
             'get_one' => [
-                'type' => 'nonce_only'
+                'type' => 'protected'
             ],
         ]
     ];

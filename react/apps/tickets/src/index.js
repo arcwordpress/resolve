@@ -6,7 +6,7 @@ const TicketsForm = ({ record }) => {
   const { Input: TitleField } = useTextField({
     name: 'title',
     label: 'Title',
-    required: true,
+    required: true, 
   });
 
   return (
