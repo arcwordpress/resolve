@@ -13,10 +13,6 @@ const TicketsForm = ({ record }) => {
     <AppForm
       collectionKey="tickets"
       recordId={record?.id}
-      apiAuth={{
-        username: process.env.WP_GATEWAY_API_USERNAME,
-        password: process.env.WP_GATEWAY_API_PASSWORD,
-      }}
     >
       <TitleField />
     </AppForm>
@@ -24,13 +20,9 @@ const TicketsForm = ({ record }) => {
 };
 
 const App = () => {
-  const auth = {
-    username: process.env.WP_GATEWAY_API_USERNAME,
-    password: process.env.WP_GATEWAY_API_PASSWORD,
-  };
   return (
     <div className="resolve-tickets-app">
-      <GridProvider value={{ auth }}>
+      <GridProvider>
         <Grid
           collectionKey="tickets"
           viewType="table"

@@ -15,7 +15,6 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^31.0.0",
-    "dotenv-webpack": "^8.0.1"
+    "@wordpress/scripts": "^31.0.0"
   }
 }
